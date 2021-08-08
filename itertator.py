@@ -1,6 +1,10 @@
 import time
 
 class FiboIter():
+    def __init__(self, maxNumber: int):
+        assert type(maxNumber) == int
+        self.maxNumber = maxNumber
+
 
     def __iter__(self):
         self.n1 = 0
@@ -10,6 +14,11 @@ class FiboIter():
         return self
 
     def __next__(self):
+        if self.counter == self.maxNumber:
+            print("Maximum iterations reached")
+            raise StopIteration()
+                
+
         if self.counter == 0:
             self.counter +=1
             return self.n1
@@ -22,10 +31,14 @@ class FiboIter():
             # self.n2 = self.aux
             self.n1, self.n2 = self.n2, self.aux
             self.counter += 1
+            
+
             return self.aux
 
 if __name__ == "__main__":
-    fibonacci = FiboIter()
+    maxNumber = int(input("Enter a maximum number of iterations: "))
+
+    fibonacci = FiboIter(maxNumber)
 
     for element in fibonacci:
         print(element)
